@@ -29,8 +29,8 @@
         if (JSON.parse(localStorage.getItem('pcbox.prefs') || '{}').mouvement === 'reduit') document.documentElement.dataset.mouvement = 'reduit';
       } catch (e) {}
     </script>
-    <script type="module" crossorigin src="./assets/index-Mtals9K8.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-pHq8PX01.css">
+    <script type="module" crossorigin src="./assets/index-D0QiKit4.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CimndoUY.css">
   </head>
   <body>
     <!-- L'ÉCRAN DE LANCEMENT (10/11/2026, à la demande : « un écran de chargement au premier
@@ -181,9 +181,6 @@
       /* PRÊT : les cartes sont aspirées dans la Ball, qui tremble trois fois et se ferme. */
       #lancement.fin .lanc-aspire { transform: translateY(-26px) scale3d(.02, .02, .02); visibility: hidden; }
       #lancement.fin .lanc-passer { opacity: 0; pointer-events: none; }
-      /* Les droits des tiers, dès l'écran de lancement (11/11/2026). */
-      .lanc-mention { position: absolute; left: 24px; right: 24px; bottom: calc(env(safe-area-inset-bottom) + 14px); margin: 0;
-        font-size: 10.5px; line-height: 1.45; color: var(--lc-doux); opacity: .8; text-align: center; }
       #lancement.fin .lanc-anneau { opacity: 0; }
       #lancement.fin .lanc-ball { animation: lancCapture 520ms ease-in-out 160ms both; }
       @keyframes lancCapture {
@@ -234,7 +231,6 @@
       <p class="lanc-detail" aria-hidden="true"></p>
       <div class="lanc-barre" aria-hidden="true"><i></i></div>
       <button class="lanc-passer" type="button" hidden></button>
-      <p class="lanc-mention"></p>
     </div>
     <script>
       // Pilote de l'écran : main.js appelle detail(), progres() et fin(). Sans lui (code qui ne
@@ -248,15 +244,15 @@
         var lg = 'fr';
         try { lg = localStorage.getItem('pcbox.langue') || (navigator.language || 'fr').slice(0, 2); } catch (e) {}
         var TEXTES = {
-          fr: { passer: 'Continuer', mention: 'Application non officielle. Pokémon © Nintendo / Creatures / GAME FREAK / The Pokémon Company — tous droits réservés.', messages: ['Ouverture du Pokédex…', 'Réveil des Pokémon…', 'Mélange des boosters…',
+          fr: { passer: 'Continuer', messages: ['Ouverture du Pokédex…', 'Réveil des Pokémon…', 'Mélange des boosters…',
             'Polissage des cartes holographiques…', 'Tri des raretés…', 'Calibrage du Pokédex…', 'Classement des extensions par bloc…',
             'Vérification des reverses…', 'Comptage des Poké Balls…', 'Lustrage des Master Balls…', 'Rangement des classeurs…',
             'Synchronisation des boîtes PC…', 'Repérage des cartes rares…', 'Dépoussiérage des promos…', 'Alignement des logos…'] },
-          en: { passer: 'Continue', mention: 'Unofficial app. Pokémon © Nintendo / Creatures / GAME FREAK / The Pokémon Company — all rights reserved.', messages: ['Opening the Pokédex…', 'Waking up the Pokémon…', 'Shuffling booster packs…',
+          en: { passer: 'Continue', messages: ['Opening the Pokédex…', 'Waking up the Pokémon…', 'Shuffling booster packs…',
             'Polishing holo cards…', 'Sorting rarities…', 'Calibrating the Pokédex…', 'Grouping sets by era…',
             'Checking reverse holos…', 'Counting Poké Balls…', 'Buffing Master Balls…', 'Tidying up binders…',
             'Syncing PC boxes…', 'Spotting rare cards…', 'Dusting off promos…', 'Lining up set logos…'] },
-          ja: { passer: 'つづける', mention: 'ひこうしき アプリ。Pokémon © Nintendo / Creatures / GAME FREAK / The Pokémon Company — All rights reserved.', messages: ['ずかんを ひらいています…', 'ポケモンを おこしています…', 'パックを まぜています…',
+          ja: { passer: 'つづける', messages: ['ずかんを ひらいています…', 'ポケモンを おこしています…', 'パックを まぜています…',
             'ホロカードを みがいています…', 'レアリティを ならべています…', 'ずかんを ちょうせい中…', 'シリーズを せいり中…',
             'リバースを たしかめています…', 'モンスターボールを かぞえています…', 'マスターボールを みがいています…', 'バインダーを せいり中…',
             'パソコンの ボックスを どうき中…', 'レアカードを さがしています…', 'プロモカードを ととのえています…', 'ロゴを ならべています…'] },
@@ -267,8 +263,6 @@
         var note = function (x) { if (journal.length < 400) journal.push(Math.round(performance.now()) + ' ' + x); };
         var etape = el.querySelector('.lanc-etape'), detail = el.querySelector('.lanc-detail'), passer = el.querySelector('.lanc-passer');
         passer.textContent = T.passer;
-        var mention = el.querySelector('.lanc-mention');
-        if (mention) mention.textContent = T.mention;
         var fini = false;
         var reduit = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
