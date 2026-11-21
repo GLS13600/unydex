@@ -14,18 +14,18 @@
       "screenshotURLs": [],
       "versions": [
         {
-          "version": "1.0.223",
+          "version": "1.0.225",
           "date": "2026-11-21",
-          "localizedDescription": "Build 1.0.223.",
-          "downloadURL": "https://github.com/GLS13600/boites-pc/releases/download/v1.0.223/Unydex.ipa",
-          "size": 385043487,
+          "localizedDescription": "Build 1.0.225.",
+          "downloadURL": "https://github.com/GLS13600/boites-pc/releases/download/v1.0.225/Unydex.ipa",
+          "size": 385045791,
           "minOSVersion": "15.0"
         }
       ],
-      "version": "1.0.223",
+      "version": "1.0.225",
       "versionDate": "2026-11-21",
-      "downloadURL": "https://github.com/GLS13600/boites-pc/releases/download/v1.0.223/Unydex.ipa",
-      "size": 385043487
+      "downloadURL": "https://github.com/GLS13600/boites-pc/releases/download/v1.0.225/Unydex.ipa",
+      "size": 385045791
     }
   ]
 }
