@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Unydex">
+  <title>Unydex</title>
+  <!-- Généré par scripts/icones.mjs : ne pas éditer à la main. Carré plein volontairement :
+       iOS applique lui-même son masque arrondi. -->
+  <rect width="1024" height="1024" fill="#080b13"/>
+  <g fill="none" stroke="#2c3548" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"><path d="M168 264V208A40 40 0 0 1 208 168H264"/><path d="M760 168H816A40 40 0 0 1 856 208V264"/><path d="M856 760V816A40 40 0 0 1 816 856H760"/><path d="M264 856H208A40 40 0 0 1 168 816V760"/></g><path fill="#f0524a" d="M263.63 296H403.57L468 403.38L532.43 296H672.37L528 536.62V728H408V536.62Z"/><path fill="#f6f5f1" d="M705.02 296H761L604 557.67V728H556V544.37Z"/>
+</svg>

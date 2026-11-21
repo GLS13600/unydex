@@ -1,43 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Boîtes PC">
-  <title>Boîtes PC</title>
-
-  <!--
-    Icône d'application. Carré plein volontairement : iOS applique lui-même son masque
-    arrondi, un fond transparent ou pré-arrondi donnerait des bords noirs.
-    Trois signes suffisent à dire « Pokédex » : la grande lentille bleue cerclée de
-    blanc, les trois voyants, et la bande inférieure qui rappelle le boîtier ouvert.
-  -->
-
-  <defs>
-    <linearGradient id="rouge" x1="0" y1="0" x2="0.35" y2="1">
-      <stop offset="0" stop-color="#ef3b30"/>
-      <stop offset="1" stop-color="#c4231b"/>
-    </linearGradient>
-    <linearGradient id="bleu" x1="0.2" y1="0" x2="0.8" y2="1">
-      <stop offset="0" stop-color="#4cc3ec"/>
-      <stop offset="1" stop-color="#1c9bd1"/>
-    </linearGradient>
-  </defs>
-
-  <rect width="1024" height="1024" fill="url(#rouge)"/>
-
-  <!-- Bande du bas : le décroché du boîtier, plus sombre que le fond. -->
-  <path d="M0 742 L560 742 Q612 742 640 706 L676 660 Q704 624 756 624 L1024 624 L1024 1024 L0 1024 Z"
-        fill="#a81a14" opacity="0.5"/>
-  <path d="M0 820 L556 820 Q608 820 636 784 L672 738 Q700 702 752 702 L1024 702 L1024 1024 L0 1024 Z"
-        fill="#9c1610" opacity="0.55"/>
-
-  <!-- Lentille principale : anneau blanc, verre bleu, reflet. -->
-  <circle cx="388" cy="376" r="228" fill="#ffffff"/>
-  <circle cx="388" cy="376" r="188" fill="url(#bleu)"/>
-  <circle cx="322" cy="316" r="52" fill="#ffffff" opacity="0.9"/>
-  <circle cx="452" cy="452" r="24" fill="#ffffff" opacity="0.45"/>
-
-  <!-- Les trois voyants, à droite : la signature du Pokédex. -->
-  <circle cx="806" cy="236" r="52" fill="#ffffff" opacity="0.28"/>
-  <circle cx="806" cy="236" r="40" fill="#f4c53c"/>
-  <circle cx="806" cy="372" r="52" fill="#ffffff" opacity="0.28"/>
-  <circle cx="806" cy="372" r="40" fill="#3fbf6a"/>
-  <circle cx="806" cy="508" r="52" fill="#ffffff" opacity="0.28"/>
-  <circle cx="806" cy="508" r="40" fill="#e85b6a"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024" role="img" aria-label="Unydex">
+  <title>Unydex</title>
+  <!-- Généré par scripts/icones.mjs : ne pas éditer à la main. Carré plein volontairement :
+       iOS applique lui-même son masque arrondi. -->
+  <rect width="1024" height="1024" fill="#ffffff"/>
+  <g fill="none" stroke="#d3d7dd" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"><path d="M168 264V208A40 40 0 0 1 208 168H264"/><path d="M760 168H816A40 40 0 0 1 856 208V264"/><path d="M856 760V816A40 40 0 0 1 816 856H760"/><path d="M264 856H208A40 40 0 0 1 168 816V760"/></g><path fill="#d03f36" d="M263.63 296H403.57L468 403.38L532.43 296H672.37L528 536.62V728H408V536.62Z"/><path fill="#131a2b" d="M705.02 296H761L604 557.67V728H556V544.37Z"/>
 </svg>

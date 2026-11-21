@@ -71,7 +71,7 @@
 <body>
 <main>
 <h1>Politique de confidentialité</h1>
-<p><strong>Version 2.2 — En vigueur au 14 novembre 2026</strong> (ajout : article 4.9, notifications)</p>
+<p><strong>Version 2.4 — En vigueur au 21 novembre 2026</strong> (ajouts : article 2.3, rapports d'erreur et statistiques d'usage anonymes ; version Android)</p>
 <h2>Préambule</h2>
 <p>La présente politique a pour objet d'informer l'utilisateur de l'application Unydex et du site qui lui est associé (ci-après ensemble « l'Application ») des traitements de données à caractère personnel mis en œuvre à l'occasion de leur utilisation, conformément aux articles 12 à 14 du règlement (UE) 2016/679 du 27 avril 2016 (ci-après « le RGPD »), à la loi n° 78-17 du 6 janvier 1978 modifiée, dite « Informatique et Libertés », et à son article 82 relatif aux traceurs.</p>
 <p>Elle fait partie intégrante des <a href="conditions.html">conditions générales d'utilisation</a>.</p>
@@ -98,7 +98,7 @@
 <h2>Article 2 — Données enregistrées sur le terminal</h2>
 <p>L'Application enregistre dans son espace de stockage local, sur le terminal :</p>
 <ul>
-<li>la collection : Pokémon capturés (normaux et chromatiques), contenu, ordre, noms et fonds des boîtes, équipes de combat, cartes possédées et leurs exemplaires (version, état, date d'ajout), favoris, liste de souhaits et ses prix cibles, classeurs, historique des prix et de la valeur de la collection, journal des dernières actions ;</li>
+<li>la collection : Pokémon capturés (normaux et chromatiques), contenu, ordre, noms et fonds des boîtes, équipes de combat, cartes possédées et leurs exemplaires (version, état, date d'ajout), favoris, liste de souhaits et ses prix cibles, classeurs, <strong>produits scellés possédés</strong> (état scellé ou ouvert, et, si l'utilisateur les saisit, date et prix d'achat), succès débloqués, historique des prix et de la valeur de la collection, journal des dernières actions ;</li>
 <li>le nombre de cartes scannées dans la journée (limite de la version gratuite) ;</li>
 <li>les préférences : thème, langue, version de jeu, affichages, mode du scan, sons et vibrations, animations, source et devise des prix, réglage des publicités de la version de développement ;</li>
 <li>les réglages de PokéAdvisor, sa mémoire, la conversation et <strong>la clé d'accès Mistral AI de l'utilisateur</strong> ;</li>
@@ -115,13 +115,22 @@
 <h3>2.2. Sauvegarde par fichier</h3>
 <p>L'utilisateur peut exporter l'intégralité de ses données dans un fichier, et l'importer. Le fichier est remis par la feuille de partage du système ; son devenir relève du choix de l'utilisateur (Fichiers, AirDrop, messagerie…). La clé Mistral AI n'y figure pas.</p>
 <hr />
+<h3>2.3. Rapports d'erreur et statistiques d'usage anonymes</h3>
+<p>Pour corriger les erreurs et améliorer l'Application, celle-ci transmet au responsable du traitement (base de données hébergée par Supabase, article 9) :</p>
+<ul>
+<li>les <strong>erreurs techniques</strong> rencontrées : message d'erreur, emplacement dans le code, page affichée, version, plateforme (web, iOS, Android) et modèle de système en deux mots (« iOS 18.2 ») ;</li>
+<li>des <strong>événements d'usage</strong> : ouverture de l'Application, pages consultées et temps passé sur chacune, page affichée au moment de quitter l'Application, touchers répétés au même endroit, opérations lentes, chargements abandonnés.</li>
+</ul>
+<p>Ces données sont rattachées à un <strong>identifiant tiré au hasard</strong> sur le terminal, renouvelé tous les treize mois, et à un identifiant de session. Elles ne comportent <strong>ni adresse électronique, ni identifiant de compte, ni pseudonyme, ni contenu de la collection, ni texte saisi</strong>, et ne sont croisées avec aucune autre donnée. Elles ne servent qu'à produire des statistiques et à corriger l'Application, sont conservées <strong>90 jours</strong>, et ne sont communiquées à personne.</p>
+<p><strong>Base légale</strong> : l'intérêt légitime du responsable du traitement à assurer le bon fonctionnement de l'Application et à l'améliorer (article 6.1.f du RGPD). La lecture et l'écriture de l'identifiant sur le terminal relèvent de l'exemption de consentement prévue pour la mesure d'audience strictement nécessaire (article 82 de la loi Informatique et Libertés ; délibération CNIL n° 2020-091). L'utilisateur peut s'y <strong>opposer</strong> à tout moment : Profil → Confidentialité → « Rapports d'erreur et statistiques » → « Coupés ».</p>
 <h2>Article 3 — Services tiers interrogés par l'Application</h2>
 <p>Certaines fonctions nécessitent d'interroger un service tiers, <strong>y compris sans compte</strong>. À chaque requête, ce service reçoit nécessairement l'<strong>adresse IP</strong> du terminal, des informations techniques (type de navigateur ou de système) et l'objet de la demande. Ces services agissent en qualité de responsables de leurs propres traitements, selon leurs politiques respectives.</p>
 <div class="tableau"><table><thead><tr><th>Service</th><th>Quand</th><th>Ce qu'il reçoit</th></tr></thead><tbody>
-<tr><td><strong>TCGdex</strong> (<code>api.tcgdex.net</code>, <code>assets.tcgdex.net</code>)</td><td>Univers Cartes : séries, extensions, fiches, images, raretés, prix</td><td>Les extensions et cartes consultées ; <strong>les termes saisis dans la recherche de cartes</strong></td></tr>
+<tr><td><strong>TCGdex</strong> (<code>api.tcgdex.net</code>, <code>assets.tcgdex.net</code>)</td><td>Univers Cartes : séries, extensions, fiches, images, raretés, prix</td><td>Les extensions et cartes consultées ; <strong>les termes saisis dans la recherche de cartes</strong> (la recherche d'un nom de Pokémon interroge aussi le catalogue anglais, par son numéro du Pokédex)</td></tr>
+<tr><td><strong>Prix des produits scellés</strong> : base de données de l'éditeur (Supabase)</td><td>À l'affichage des produits scellés d'une extension, de la fiche d'un produit et des produits possédés</td><td>L'identifiant des produits affichés, sans donnée de l'utilisateur. Ces prix sont relevés une fois par jour par un serveur de l'éditeur dans les fichiers publiés par <strong>Cardmarket</strong> (guide des prix) et par <strong>tcgcsv.com</strong> (copie du catalogue de <strong>TCGplayer</strong>) : ces services ne reçoivent rien de l'utilisateur ni de son terminal</td></tr>
 <tr><td><strong>Pokémon TCG</strong> (<code>images.pokemontcg.io</code>) et <strong>Scrydex</strong> (<code>images.scrydex.com</code>)</td><td>Images des cartes de la collection anglaise</td><td>Les images demandées</td></tr>
 <tr><td><strong>Frankfurter</strong> (<code>api.frankfurter.dev</code>), taux de la Banque centrale européenne</td><td>Au plus une fois toutes les 20 heures, dans l'univers Cartes</td><td>Une demande de taux de change, sans donnée de l'utilisateur</td></tr>
-<tr><td><strong>Prix eBay</strong> : fonction de l'éditeur hébergée par Supabase, qui interroge l'<strong>API Browse d'eBay</strong> (<code>api.ebay.com</code>)</td><td>Cartes gradées : à l'ouverture de la fiche d'une carte dont l'utilisateur possède ou s'apprête à ajouter un exemplaire gradé, et pour ses gradées possédées. Cartes non gradées : seulement si l'utilisateur a choisi « eBay » comme source des prix, à l'ouverture d'une fiche et pour ses cartes possédées. Au plus une fois par carte (et par grade) toutes les 12 heures</td><td>L'identifiant de la carte et, s'il y a lieu, le grade, sans donnée de l'utilisateur ; eBay ne reçoit qu'une recherche (nom de la carte, numéro, organisme, note), de la part du serveur de l'éditeur</td></tr>
+<tr><td><strong>Prix eBay</strong> : fonction de l'éditeur hébergée par Supabase, qui interroge l'<strong>API Browse d'eBay</strong> (<code>api.ebay.com</code>)</td><td>Cartes gradées : à l'ouverture de la fiche d'une carte dont l'utilisateur possède ou s'apprête à ajouter un exemplaire gradé, et pour ses gradées possédées. Cartes non gradées : seulement si l'utilisateur a choisi « eBay » comme source des prix, à l'ouverture d'une fiche et pour ses cartes possédées. Produits scellés : si l'utilisateur a choisi « eBay » comme source de leur prix, ou en l'absence de prix Cardmarket et TCGplayer. Au plus une fois par carte ou produit (et par grade) toutes les 12 heures</td><td>L'identifiant de la carte et, s'il y a lieu, le grade, sans donnée de l'utilisateur ; eBay ne reçoit qu'une recherche (nom de la carte, numéro, organisme, note), de la part du serveur de l'éditeur</td></tr>
 <tr><td><strong>GitHub Pages</strong> (GitHub, Inc.)</td><td>Version web uniquement : chargement du site</td><td>Les pages et fichiers demandés</td></tr>
 <tr><td>Cardmarket, Vinted, eBay</td><td>Seulement si l'utilisateur touche le lien correspondant ; la page s'ouvre dans son navigateur</td><td>Le nom de la carte recherchée</td></tr>
 </tbody></table></div>
@@ -135,6 +144,7 @@
 <li><strong>Collection</strong> — l'ensemble des données décrites à l'article 2, <strong>à l'exception de la clé Mistral AI</strong> et des seules préférences d'affichage propres au terminal. Elle comprend donc la mémoire et la <strong>conversation de PokéAdvisor</strong>, et la version de jeu retenue pour l'équipe gratuite. <em>Origine : l'usage de l'Application.</em></li>
 <li><strong>Données techniques</strong> — date de la dernière modification ; <strong>type</strong> de terminal d'origine (« iPhone » ou « Navigateur »), sans identifiant ni nom de terminal. <em>Origine : automatique.</em></li>
 </ul>
+<p><strong>Courriels.</strong> L'adresse électronique ne sert qu'aux messages nécessaires au compte : confirmation de l'inscription (avec un code) et réinitialisation du mot de passe. Aucun courriel commercial ou d'information n'est envoyé. Ces messages sont expédiés par le prestataire <strong>Brevo</strong> (article 9). Chacun comporte un lien de désinscription, qui adresse une demande au responsable du traitement ; la suppression du compte met fin à tout envoi.</p>
 <h3>4.2. Connexion par un fournisseur d'identité</h3>
 <p>Lorsque l'utilisateur se connecte au moyen d'un compte Google ou Apple, le fournisseur communique <strong>l'adresse électronique et, le cas échéant, le nom</strong> associés à ce compte, à l'exclusion de toute autre donnée. Le service d'Apple permet de <strong>masquer son adresse électronique</strong>. Les traitements réalisés par le fournisseur relèvent de sa propre politique de confidentialité. À la suppression d'un compte connecté par Apple, l'Application demande une nouvelle confirmation à Apple et transmet le code obtenu à Apple, par le serveur du Service, pour <strong>révoquer l'accès</strong> de l'Application ; rien n'en est conservé.</p>
 <h3>4.3. Synchronisation</h3>
@@ -214,6 +224,7 @@
 <ul>
 <li><strong>Supabase, Inc.</strong> — base de données, authentification et synchronisation en temps réel. Données hébergées dans l'Union européenne, <strong>région Irlande</strong> (infrastructure Amazon Web Services, eu-west-1).</li>
 <li><strong>GitHub, Inc.</strong> — hébergement du site et de ses fichiers.</li>
+<li><strong>Sendinblue SAS (Brevo)</strong>, Paris, France — envoi des courriels liés au compte (confirmation de l'inscription, réinitialisation du mot de passe). Il reçoit l'adresse électronique et le contenu du message.</li>
 <li><strong>Apple Inc. / Apple Distribution International Ltd.</strong> — distribution de l'Application, service de connexion et, le cas échéant, paiement de l'abonnement.</li>
 </ul>
 <p>Sont en outre destinataires, en qualité de responsables de leurs propres traitements : Google (connexion, si l'utilisateur la choisit ; publicité), Mistral AI (PokéAdvisor, à l'initiative de l'utilisateur) et les services tiers listés à l'article 3.</p>
@@ -228,6 +239,7 @@
 <tr><td>Données enregistrées sur le terminal</td><td>Jusqu'à la désinstallation de l'Application ou l'effacement de ses données</td></tr>
 <tr><td>Messages entre amis</td><td>Jusqu'au retrait de l'amitié ou au blocage par l'un des deux, ou à la suppression de l'un des deux comptes</td></tr>
 <tr><td>Signalements</td><td>Un an au plus après leur traitement</td></tr>
+<tr><td>Rapports d'erreur et statistiques d'usage (article 2.3)</td><td>90 jours</td></tr>
 <tr><td>Essais de saisie d'un code ami</td><td>Un jour</td></tr>
 <tr><td>Choix relatifs à la publicité</td><td>Treize mois au plus, puis redemandés</td></tr>
 <tr><td>Journaux techniques des hébergeurs</td><td>Durée fixée par chaque hébergeur, de l'ordre de quelques jours à quelques semaines</td></tr>
@@ -245,10 +257,12 @@
 <div class="tableau"><table><thead><tr><th>Droit</th><th>Modalité</th></tr></thead><tbody>
 <tr><td>Accès et portabilité</td><td>Profil → Sauvegarde et données → « Exporter » : un fichier complet et structuré, remis immédiatement</td></tr>
 <tr><td>Rectification</td><td>Profil → Compte : pseudonyme et image de profil se modifient directement</td></tr>
-<tr><td>Effacement</td><td>Profil → Compte → « Supprimer mon compte » : effacement immédiat et définitif du compte, du profil et de la collection enregistrée sur les serveurs, pour Unydex et Cartodex</td></tr>
+<tr><td>Effacement des données</td><td>Profil → Confidentialité → « Supprimer mes données » : effacement de la collection (Pokémon, cartes, produits scellés, classeurs, équipes, succès, journal) sur le terminal et, pour un compte connecté, sur les serveurs et sur tous les terminaux synchronisés, ainsi que de la sauvegarde Cartodex et de ses favoris. Le compte, le profil, les amis et les messages sont conservés</td></tr>
+<tr><td>Effacement du compte</td><td>Profil → Compte (ou Profil → Confidentialité) → « Supprimer mon compte » : effacement immédiat et définitif du compte, du profil, de la collection, des amitiés et des messages enregistrés sur les serveurs, pour Unydex et Cartodex</td></tr>
 <tr><td>Retrait du consentement publicitaire</td><td>Profil → Confidentialité → « Gérer mes choix publicitaires » ; réglages d'iOS pour le suivi</td></tr>
+<tr><td>Opposition aux rapports d'erreur et statistiques</td><td>Profil → Confidentialité → « Rapports d'erreur et statistiques » → « Coupés »</td></tr>
 </tbody></table></div>
-<p>La suppression du compte est sans incidence sur la collection enregistrée sur le terminal.</p>
+<p>La suppression du compte est sans incidence sur la collection enregistrée sur le terminal, qu'efface « Supprimer mes données », ou Profil → Sauvegarde et données → « Effacer les données de l'appareil ».</p>
 <h3>13.2. Auprès du responsable du traitement</h3>
 <p>Les autres demandes s'adressent à l'adresse figurant à l'article 1, accompagnées, en cas de doute raisonnable, de tout élément justifiant de l'identité du demandeur. Il y est répondu dans le délai d'un mois, prorogeable de deux mois en cas de complexité.</p>
 <h3>13.3. Réclamation</h3>

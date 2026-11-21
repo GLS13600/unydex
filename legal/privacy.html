@@ -71,7 +71,7 @@
 <body>
 <main>
 <h1>Privacy Policy</h1>
-<p><strong>Version 2.2 — Effective 14 November 2026</strong> (added: section 4.9, notifications)</p>
+<p><strong>Version 2.4 — Effective 21 November 2026</strong> (added: section 2.3, anonymous error reports and usage statistics; Android version)</p>
 <h2>Preamble</h2>
 <p>This policy informs users of the Unydex application and its associated website (together, "the App") about the processing of personal data carried out when they use them, in accordance with Articles 12 to 14 of Regulation (EU) 2016/679 of 27 April 2016 (the "GDPR"), the French Data Protection Act No. 78-17 of 6 January 1978 as amended, and its Article 82 on trackers.</p>
 <p>It forms an integral part of the <a href="conditions.html">Terms of Use</a>. The French version prevails in case of discrepancy.</p>
@@ -98,7 +98,7 @@
 <h2>2 — Data stored on your device</h2>
 <p>The App stores locally, on your device:</p>
 <ul>
-<li>your collection: caught Pokémon (regular and shiny), box contents, order, names and wallpapers, battle teams, owned cards and their copies (version, condition, date added), favourites, wishlist and its target prices, binders, price and collection value history, a log of recent actions;</li>
+<li>your collection: caught Pokémon (regular and shiny), box contents, order, names and wallpapers, battle teams, owned cards and their copies (version, condition, date added), favourites, wishlist and its target prices, binders, <strong>owned sealed products</strong> (sealed or opened, and, if you enter them, purchase date and price), unlocked achievements, price and collection value history, a log of recent actions;</li>
 <li>the number of cards scanned today (free version limit);</li>
 <li>your preferences: theme, language, game version, display options, scan mode, sounds and haptics, animations, price source and currency, the development build's ad setting;</li>
 <li>PokéAdvisor settings, memory, conversation and <strong>your Mistral AI access key</strong>;</li>
@@ -115,13 +115,22 @@
 <h3>2.2. File backup</h3>
 <p>You can export all your data to a file and import it. The file is handed over through the system share sheet; what happens to it is your choice. Your Mistral AI key is not included.</p>
 <hr />
+<h3>2.3. Anonymous error reports and usage statistics</h3>
+<p>To fix errors and improve the App, it sends to the controller (database hosted by Supabase, section 9):</p>
+<ul>
+<li><strong>technical errors</strong> encountered: error message, location in the code, page shown, version, platform (web, iOS, Android) and system in two words ("iOS 18.2");</li>
+<li><strong>usage events</strong>: opening the App, pages viewed and time spent on each, the page shown when leaving the App, repeated taps on the same spot, slow operations, abandoned loads.</li>
+</ul>
+<p>They are linked to a <strong>random identifier</strong> generated on the device, renewed every thirteen months, and to a session identifier. They contain <strong>no email address, account identifier, username, collection content or typed text</strong>, and are never combined with other data. They are used only for statistics and fixing the App, kept for <strong>90 days</strong>, and shared with no one.</p>
+<p><strong>Legal basis</strong>: the controller's legitimate interest in keeping the App working and improving it (Article 6(1)(f) GDPR); the identifier falls under the consent exemption for strictly necessary audience measurement. You can <strong>object</strong> at any time: Profile → Privacy → "Error reports and statistics" → "Off".</p>
 <h2>3 — Third-party services queried by the App</h2>
 <p>Some features require querying a third-party service, <strong>including without an account</strong>. Each request necessarily discloses the device's <strong>IP address</strong>, technical information (browser or system type) and the request itself. These services act as controllers of their own processing, under their own policies.</p>
 <div class="tableau"><table><thead><tr><th>Service</th><th>When</th><th>What it receives</th></tr></thead><tbody>
-<tr><td><strong>TCGdex</strong> (<code>api.tcgdex.net</code>, <code>assets.tcgdex.net</code>)</td><td>Cards section: series, sets, card pages, images, rarities, prices</td><td>The sets and cards viewed; <strong>terms typed in the card search</strong></td></tr>
+<tr><td><strong>TCGdex</strong> (<code>api.tcgdex.net</code>, <code>assets.tcgdex.net</code>)</td><td>Cards section: series, sets, card pages, images, rarities, prices</td><td>The sets and cards viewed; <strong>terms typed in the card search</strong> (searching a Pokémon name also queries the English catalogue, by Pokédex number)</td></tr>
+<tr><td><strong>Sealed product prices</strong>: the publisher's database (Supabase)</td><td>When showing a set's sealed products, a product page and owned products</td><td>The identifiers of the products shown, with no user data. These prices are collected once a day by a publisher server from files published by <strong>Cardmarket</strong> (price guide) and <strong>tcgcsv.com</strong> (a copy of the <strong>TCGplayer</strong> catalogue): these services receive nothing from the user or their device</td></tr>
 <tr><td><strong>Pokémon TCG</strong> (<code>images.pokemontcg.io</code>) and <strong>Scrydex</strong> (<code>images.scrydex.com</code>)</td><td>Card images in the English collection</td><td>The requested images</td></tr>
 <tr><td><strong>Frankfurter</strong> (<code>api.frankfurter.dev</code>), European Central Bank rates</td><td>At most once every 20 hours, in the Cards section</td><td>An exchange-rate request, with no user data</td></tr>
-<tr><td><strong>eBay prices</strong>: the publisher's function hosted by Supabase, which queries the <strong>eBay Browse API</strong> (<code>api.ebay.com</code>)</td><td>Graded cards: when opening the page of a card the user owns or is about to add a graded copy of, and for owned graded copies. Ungraded cards: only if the user chose « eBay » as the price source, when opening a card page and for owned cards. At most once per card (and grade) every 12 hours</td><td>The card identifier and, where relevant, the grade, with no user data; eBay only receives a search (card name, number, grading company, grade), from the publisher's server</td></tr>
+<tr><td><strong>eBay prices</strong>: the publisher's function hosted by Supabase, which queries the <strong>eBay Browse API</strong> (<code>api.ebay.com</code>)</td><td>Graded cards: when opening the page of a card the user owns or is about to add a graded copy of, and for owned graded copies. Ungraded cards: only if the user chose « eBay » as the price source, when opening a card page and for owned cards. Sealed products: if the user chose « eBay » as their price source, or when no Cardmarket or TCGplayer price exists. At most once per card or product (and grade) every 12 hours</td><td>The card identifier and, where relevant, the grade, with no user data; eBay only receives a search (card name, number, grading company, grade), from the publisher's server</td></tr>
 <tr><td><strong>GitHub Pages</strong> (GitHub, Inc.)</td><td>Web version only: loading the site</td><td>The requested pages and files</td></tr>
 <tr><td>Cardmarket, Vinted, eBay</td><td>Only if you tap the corresponding link; the page opens in your browser</td><td>The name of the card searched</td></tr>
 </tbody></table></div>
@@ -213,6 +222,7 @@
 <ul>
 <li><strong>Supabase, Inc.</strong> — database, authentication and real-time sync. Data hosted in the European Union, <strong>Ireland region</strong> (Amazon Web Services, eu-west-1).</li>
 <li><strong>GitHub, Inc.</strong> — hosting of the website and its files.</li>
+<li><strong>Sendinblue SAS (Brevo)</strong>, Paris, France — sending account emails (sign-up confirmation, password reset). It receives the email address and the message content. No marketing email is ever sent; every email contains an unsubscribe link, and deleting the account ends all emails.</li>
 <li><strong>Apple Inc. / Apple Distribution International Ltd.</strong> — App distribution, sign-in service and, where applicable, subscription payment.</li>
 </ul>
 <p>Also recipients, as controllers of their own processing: Google (sign-in, if chosen; advertising), Mistral AI (PokéAdvisor, at your initiative) and the third-party services listed in Section 3.</p>
@@ -227,6 +237,7 @@
 <tr><td>Data stored on the device</td><td>Until the App is uninstalled or its data cleared</td></tr>
 <tr><td>Messages between friends</td><td>Until either user removes or blocks the other, or until either account is deleted</td></tr>
 <tr><td>Reports</td><td>One year at most after they are handled</td></tr>
+<tr><td>Error reports and usage statistics (section 2.3)</td><td>90 days</td></tr>
 <tr><td>Friend-code attempts</td><td>One day</td></tr>
 <tr><td>Advertising choices</td><td>Thirteen months at most, then asked again</td></tr>
 <tr><td>Hosting providers' technical logs</td><td>As set by each provider, from a few days to a few weeks</td></tr>
@@ -244,8 +255,10 @@
 <div class="tableau"><table><thead><tr><th>Right</th><th>How</th></tr></thead><tbody>
 <tr><td>Access and portability</td><td>Profile → Backup &amp; data → "Export": a complete, structured file, delivered immediately</td></tr>
 <tr><td>Rectification</td><td>Profile → Account: edit your username and profile picture directly</td></tr>
-<tr><td>Erasure</td><td>Profile → Account → "Delete my account": immediate and permanent erasure of the account, profile and server-side collection, for Unydex and Cartodex</td></tr>
+<tr><td>Erasure of data</td><td>Profile → Privacy → "Delete my data": erases the collection (Pokémon, cards, sealed products, binders, teams, achievements, log) on the device and, for a signed-in account, on the servers and on all synced devices, together with the Cartodex backup and its favourites. The account, profile, friends and messages are kept</td></tr>
+<tr><td>Erasure of the account</td><td>Profile → Account (or Profile → Privacy) → "Delete my account": immediate and permanent erasure of the account, profile, collection, friendships and messages stored on the servers, for Unydex and Cartodex</td></tr>
 <tr><td>Withdrawing advertising consent</td><td>Profile → Privacy → "Manage my ad choices"; iOS Settings for tracking</td></tr>
+<tr><td>Objecting to error reports and statistics</td><td>Profile → Privacy → "Error reports and statistics" → "Off"</td></tr>
 </tbody></table></div>
 <h3>13.2. By contacting the controller</h3>
 <p>Other requests can be sent to the address in Section 1, with proof of identity where there is reasonable doubt. We respond within one month, extendable by two months for complex requests.</p>

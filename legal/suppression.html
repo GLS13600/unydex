@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Supprimer son compte — Unydex</title>
+<meta name="color-scheme" content="light dark" />
+<style>
+  :root {
+    --paper: #f6f5f1; --panel: #fff; --ink: #1b1a17; --muted: #6b675d;
+    --rule: #e3e0d6; --ball: #d6453c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #16191d; --panel: #1c2026; --ink: #eef1f4; --muted: #99a3ad;
+      --rule: #2c333b; --ball: #f06056;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: max(24px, env(safe-area-inset-top)) 18px calc(48px + env(safe-area-inset-bottom));
+    background: var(--paper);
+    color: var(--ink);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    -webkit-text-size-adjust: 100%;
+  }
+  main { max-width: 46rem; margin: 0 auto; }
+  h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 1rem; }
+  h2 { font-size: 1.3rem; margin: 2.2rem 0 .6rem; }
+  h3 { font-size: 1.05rem; margin: 1.6rem 0 .4rem; }
+  h4 { font-size: .95rem; margin: 1.2rem 0 .3rem; color: var(--muted); }
+  p, li { margin: .6rem 0; }
+  a { color: var(--ball); }
+  hr { border: 0; border-top: 1px solid var(--rule); margin: 2rem 0; }
+  code {
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 5px;
+    padding: 1px 5px; font-size: .88em;
+  }
+  blockquote {
+    margin: 1.2rem 0; padding: .8rem 1rem;
+    border-left: 3px solid var(--ball); background: var(--panel);
+    border-radius: 0 10px 10px 0;
+  }
+  blockquote p { margin: .4rem 0; }
+  pre {
+    background: var(--panel); border: 1px solid var(--rule); border-radius: 10px;
+    padding: .8rem 1rem; font-size: .78em; line-height: 1.45;
+    white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+  /* Ces pages se lisent au téléphone : les tableaux occupent la largeur disponible et
+     leur texte passe à la ligne, plutôt que de déborder et d'imposer un défilement
+     horizontal qui masque la dernière colonne. L'enveloppe garde le débordement sous
+     le coude pour un tableau qui serait un jour trop large. */
+  .tableau { width: 100%; overflow-x: auto; margin: 1rem 0; }
+  /* Largeur FIXE et césure autorisée : en disposition automatique, la plus longue
+     suite de caractères insécables de chaque colonne impose une largeur minimale, et
+     trois colonnes de texte juridique débordaient du cadre — la dernière se trouvait
+     coupée au bord de l’écran. */
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+  /* La césure vient AVANT la coupure brutale : sans elle, les colonnes étroites
+     tranchaient au milieu des mots (« d emprisonne-ment »). La page déclare lang="fr",
+     le navigateur coupe donc aux syllabes françaises. */
+  th, td { -webkit-hyphens: auto; hyphens: auto; overflow-wrap: break-word; }
+  th, td { border: 1px solid var(--rule); padding: 8px 10px; text-align: left; vertical-align: top; font-size: .92rem; }
+  th { background: var(--panel); font-weight: 700; }
+  footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--rule); color: var(--muted); font-size: .85rem; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+<main>
+<h1>Supprimer son compte Unydex et ses données</h1>
+<p><strong>En vigueur au 21 novembre 2026</strong> — <em>Delete your Unydex account and data: see below.</em></p>
+<p>Cette page explique comment supprimer un compte Unydex et les données qui s'y rattachent, depuis l'application ou sans elle.</p>
+<hr />
+<h2>1. Depuis l'application (recommandé)</h2>
+<p><strong>Supprimer le compte et toutes ses données</strong></p>
+<ol>
+<li>Ouvrir Unydex et se connecter au compte.</li>
+<li>Toucher l'onglet <strong>Profil</strong>, puis <strong>Confidentialité</strong> (ou <strong>Compte</strong>).</li>
+<li>Toucher <strong>Supprimer mon compte</strong> et confirmer.</li>
+</ol>
+<p>La suppression est <strong>immédiate et définitive</strong> : compte, profil (pseudonyme, image), code ami, collection enregistrée sur les serveurs (Pokémon, cartes, produits scellés, classeurs, équipes, succès), amitiés et messages, appareils inscrits aux notifications, et la sauvegarde Cartodex éventuelle du même compte.</p>
+<p><strong>Supprimer seulement ses données, en gardant le compte</strong></p>
+<p>Profil → Confidentialité → <strong>Supprimer mes données</strong> : la collection est effacée de l'appareil et, pour un compte connecté, des serveurs et de tous les appareils synchronisés. Le compte, le pseudonyme, les amis et les messages sont conservés.</p>
+<h2>2. Sans l'application</h2>
+<p>Écrire à <strong>unydexapp@gmail.com</strong>, depuis l'adresse électronique du compte, avec pour objet « Suppression de compte ». La demande est traitée dans un délai d'un mois au plus ; une confirmation est envoyée une fois la suppression faite. En cas de doute raisonnable sur l'identité du demandeur, une vérification peut être demandée.</p>
+<h2>3. Ce qui est conservé</h2>
+<ul>
+<li>Aucune donnée du compte n'est conservée après la suppression.</li>
+<li>Les <strong>rapports d'erreur et statistiques d'usage anonymes</strong> ne sont rattachés à aucun compte : ils ne peuvent pas être retrouvés à partir de lui, et sont effacés automatiquement au bout de 90 jours.</li>
+<li>Les données d'un éventuel abonnement souscrit auprès d'Apple ou de Google sont tenues par ces sociétés, selon leurs propres règles ; l'abonnement se résilie dans les réglages du magasin d'applications.</li>
+</ul>
+<hr />
+<h2>Delete your account (English)</h2>
+<p><strong>In the app:</strong> sign in, open <strong>Profile → Privacy</strong> (or <strong>Account</strong>) and tap <strong>Delete my account</strong>. Deletion is immediate and permanent: account, profile, friend code, server-side collection, friendships and messages, notification devices and any linked Cartodex backup. To delete only your data and keep the account: <strong>Profile → Privacy → Delete my data</strong>.</p>
+<p><strong>Without the app:</strong> email <strong>unydexapp@gmail.com</strong> from your account's email address with the subject "Account deletion". Requests are handled within one month.</p>
+<p>Anonymous error reports and usage statistics are not linked to any account and are deleted automatically after 90 days.</p>
+<footer>
+  <a href="confidentialite.html">Confidentialité</a> ·
+  <a href="conditions.html">Conditions</a> ·
+  <a href="mentions.html">Mentions légales</a> ·
+  <a href="privacy.html" lang="en">Privacy (EN)</a> ·
+  <a href="../">Unydex</a>
+</footer>
+</main>
+</body>
+</html>
