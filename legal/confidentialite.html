@@ -71,7 +71,7 @@
 <body>
 <main>
 <h1>Politique de confidentialité</h1>
-<p><strong>Version 2.4 — En vigueur au 21 novembre 2026</strong> (ajouts : article 2.3, rapports d'erreur et statistiques d'usage anonymes ; version Android)</p>
+<p><strong>Version 2.5 — En vigueur au 21 novembre 2026</strong> (ajouts : article 2.3, rapports d'erreur et statistiques d'usage anonymes ; version Android ; article 12, limitation du débit et vérification anti-robot)</p>
 <h2>Préambule</h2>
 <p>La présente politique a pour objet d'informer l'utilisateur de l'application Unydex et du site qui lui est associé (ci-après ensemble « l'Application ») des traitements de données à caractère personnel mis en œuvre à l'occasion de leur utilisation, conformément aux articles 12 à 14 du règlement (UE) 2016/679 du 27 avril 2016 (ci-après « le RGPD »), à la loi n° 78-17 du 6 janvier 1978 modifiée, dite « Informatique et Libertés », et à son article 82 relatif aux traceurs.</p>
 <p>Elle fait partie intégrante des <a href="conditions.html">conditions générales d'utilisation</a>.</p>
@@ -225,6 +225,7 @@
 <li><strong>Supabase, Inc.</strong> — base de données, authentification et synchronisation en temps réel. Données hébergées dans l'Union européenne, <strong>région Irlande</strong> (infrastructure Amazon Web Services, eu-west-1).</li>
 <li><strong>GitHub, Inc.</strong> — hébergement du site et de ses fichiers.</li>
 <li><strong>Sendinblue SAS (Brevo)</strong>, Paris, France — envoi des courriels liés au compte (confirmation de l'inscription, réinitialisation du mot de passe). Il reçoit l'adresse électronique et le contenu du message.</li>
+<li><strong>Cloudflare, Inc.</strong> — vérification anti-robot (« Turnstile ») lors de l'inscription, de la connexion par adresse électronique et de la réinitialisation du mot de passe, lorsqu'elle est activée. Elle reçoit des signaux techniques du navigateur, sans cookie publicitaire.</li>
 <li><strong>Apple Inc. / Apple Distribution International Ltd.</strong> — distribution de l'Application, service de connexion et, le cas échéant, paiement de l'abonnement.</li>
 </ul>
 <p>Sont en outre destinataires, en qualité de responsables de leurs propres traitements : Google (connexion, si l'utilisateur la choisit ; publicité), Mistral AI (PokéAdvisor, à l'initiative de l'utilisateur) et les services tiers listés à l'article 3.</p>
@@ -241,13 +242,14 @@
 <tr><td>Signalements</td><td>Un an au plus après leur traitement</td></tr>
 <tr><td>Rapports d'erreur et statistiques d'usage (article 2.3)</td><td>90 jours</td></tr>
 <tr><td>Essais de saisie d'un code ami</td><td>Un jour</td></tr>
+<tr><td>Empreinte de l'adresse IP servant à limiter le nombre de requêtes (article 12)</td><td>Deux jours</td></tr>
 <tr><td>Choix relatifs à la publicité</td><td>Treize mois au plus, puis redemandés</td></tr>
 <tr><td>Journaux techniques des hébergeurs</td><td>Durée fixée par chaque hébergeur, de l'ordre de quelques jours à quelques semaines</td></tr>
 <tr><td>Données de l'abonnement</td><td>Durée de l'abonnement, puis durée légale de conservation des pièces comptables (dix ans) pour les seules données requises</td></tr>
 </tbody></table></div>
 <hr />
 <h2>Article 12 — Sécurité</h2>
-<p>Le responsable du traitement met en œuvre les mesures appropriées au sens de l'article 32 du RGPD, notamment : chiffrement de toutes les communications (HTTPS) ; mots de passe conservés sous forme de condensat ; cloisonnement <strong>au niveau de la base de données</strong> (sécurité au niveau des lignes), qui garantit qu'un compte ne peut lire ni modifier que ses propres enregistrements ; absence de privilège attaché à la clé publique embarquée ; fonctions à privilèges élevés limitées et verrouillées ; politique de sécurité du contenu limitant les destinations réseau de l'Application.</p>
+<p>Le responsable du traitement met en œuvre les mesures appropriées au sens de l'article 32 du RGPD, notamment : chiffrement de toutes les communications (HTTPS) ; mots de passe conservés sous forme de condensat ; cloisonnement <strong>au niveau de la base de données</strong> (sécurité au niveau des lignes), qui garantit qu'un compte ne peut lire ni modifier que ses propres enregistrements ; absence de privilège attaché à la clé publique embarquée ; fonctions à privilèges élevés limitées et verrouillées ; politique de sécurité du contenu limitant les destinations réseau de l'Application ; <strong>limitation du nombre de requêtes</strong> (inscription des appareils, statistiques, demandes d'ami, recherches de prix eBay), qui repose, pour les demandes sans compte, sur une <strong>empreinte de l'adresse IP</strong> (condensat de l'adresse et du jour, jamais l'adresse elle-même), effacée au bout de deux jours ; et, lorsqu'elle est activée, une vérification anti-robot à l'inscription (article 9). Base légale : l'intérêt légitime du responsable du traitement à protéger le service contre les abus (article 6.1.f du RGPD).</p>
 <p><strong>Ni l'adresse électronique, ni le profil, ni la collection d'un compte ne sont accessibles aux autres utilisateurs.</strong></p>
 <p>En cas de violation de données, le responsable du traitement procède aux notifications prévues aux articles 33 et 34 du RGPD.</p>
 <hr />

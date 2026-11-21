@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://assets.tcgdex.net https://images.pokemontcg.io https://images.scrydex.com; media-src 'self' blob:; font-src 'self'; worker-src 'self' blob:; connect-src 'self' blob: data: https://api.tcgdex.net https://api.mistral.ai https://api.frankfurter.dev https://surhoceznpqkpgllitnp.supabase.co wss://surhoceznpqkpgllitnp.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://assets.tcgdex.net https://images.pokemontcg.io https://images.scrydex.com; media-src 'self' blob:; font-src 'self'; worker-src 'self' blob:; connect-src 'self' blob: data: https://api.tcgdex.net https://api.mistral.ai https://api.frankfurter.dev https://surhoceznpqkpgllitnp.supabase.co wss://surhoceznpqkpgllitnp.supabase.co; object-src 'none'; base-uri 'self'; form-action 'self'" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
     <meta name="theme-color" content="#d6453c" />
@@ -15,6 +15,21 @@
     <link rel="apple-touch-icon" href="icone-180.png" />
     <link rel="icon" type="image/svg+xml" href="icon.svg" />
     <title>Unydex</title>
+    <!-- Anti-encadrement (audit du 21/11/2026) : GitHub Pages n'envoie aucun en-tête, et
+         `frame-ancestors` ne vaut pas dans une balise meta. Encadrée par une page d'une AUTRE
+         origine (« clickjacking » : faire toucher à l'aveugle), l'appli ne s'affiche pas et tente
+         de prendre toute la fenêtre. Un cadre de la même origine reste permis : la fabrique de
+         vidéos (marketing/outils/scene.html) filme l'appli dans un iframe. -->
+    <script>
+      (function () {
+        if (window.top === window.self) return;
+        var meme = false;
+        try { meme = window.top.location.origin === location.origin; } catch (e) { /* autre origine */ }
+        if (meme) return;
+        document.documentElement.style.display = 'none';
+        try { window.top.location.replace(location.href); } catch (e) { /* navigateur qui refuse */ }
+      })();
+    </script>
     <!-- Le thème est posé AVANT le premier rendu : appliqué seulement au chargement de
          main.js, l'écran clignotait en clair le temps que le module se charge. -->
     <script>
@@ -38,208 +53,173 @@
         }
       } catch (e) {}
     </script>
-    <script type="module" crossorigin src="./assets/index-pR2L66Jp.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-ComLyFTD.css">
+    <script type="module" crossorigin src="./assets/index-C9gd_dxo.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BFrc_1Ja.css">
   </head>
   <body>
-    <!-- L'ÉCRAN DE LANCEMENT (10/11/2026, à la demande : « un écran de chargement au premier
-         chargement de l'app, le temps de charger les séries ; une animation, sois inventif »).
-         Il est ICI, dans la page, et non dans main.js : il paraît dès la première image, pendant
-         que le code de l'appli (plusieurs Mo, Pokédex compris) se charge et s'analyse — sur
-         iPhone, c'était un écran vide. Six cartes, une par rareté, tournent autour d'une Poké
-         Ball ; l'anneau se remplit avec le chargement (séries, logos, raretés : main.js pilote
-         `window.__lancement`). Prêt : les cartes sont aspirées dans la Ball, qui tremble trois
-         fois comme une capture, se ferme dans un éclat d'étoiles, et l'écran s'ouvre sur l'appli.
-         Tout est en CSS ; mouvement réduit : un simple fondu. -->
+    <!-- L'ÉCRAN DE LANCEMENT. Il est ICI, dans la page, et non dans main.js : il paraît dès la
+         première image, pendant que le code de l'appli (plusieurs Mo, Pokédex compris) se
+         charge et s'analyse — sur iPhone, c'était un écran vide.
+         REFAIT le 21/11/2026, à la demande : « d'après le nouveau logo, le Y bicolore divisé en
+         deux, une animation moderne et minimaliste, l'ADN du Pokédex, les couleurs, les
+         cartes ; le logo en grand qui se déploie d'un coup, avec marqué Unydex ».
+         1. l'icône de l'appli s'ouvre au centre (aux couleurs de l'icône choisie au Profil) ;
+         2. le Y se déploie depuis son pied, puis la raie sort de derrière lui, parallèle ;
+         3. les quatre coins du viseur se referment autour, deux cartes s'ouvrent en éventail
+            derrière l'icône, « Unydex » monte lettre à lettre (le y en rouge), la devise suit ;
+         4. pendant le chargement, une ligne de scan balaie l'icône, la barre se remplit, les
+            messages défilent (main.js pilote `window.__lancement`) ;
+         5. PRÊT : une demi-seconde de plus pour lire, puis tout s'efface et l'écran part.
+         Tout est en CSS, à plat (pas de dégradé ni d'ombre colorée) ; mouvement réduit : un
+         simple fondu. -->
     <style>
+      @font-face {
+        font-family: "UrbanistLanc"; font-weight: 100 900; font-display: swap;
+        src: url("fonts/urbanist-latin.woff2") format("woff2");
+      }
       #lancement {
-        --lc-fond: #f6f5f1; --lc-fond-2: #ebe7dc; --lc-encre: #1d2330; --lc-doux: #606977;
-        --lc-rouge: #d6453c; --lc-piste: rgb(29 35 48 / 10%); --p: 0;
+        --lc-fond: #f6f5f1; --lc-encre: #1d2330; --lc-doux: #606977; --lc-rouge: #d03f36;
+        --lc-piste: rgb(29 35 48 / 10%); --lc-filet: #e3e0d6; --lc-carte: #ffffff;
+        /* L'icône (papier par défaut ; nuit, rouge : data-icone, posé par le script). */
+        --t-fond: #ffffff; --t-y: #d03f36; --t-raie: #131a2b; --t-coins: #c9ced6;
+        --p: 0; --tuile: 148px;
         position: fixed; inset: 0; z-index: 100;
-        display: grid; place-items: center; align-content: center; gap: 6px;
+        display: grid; place-items: center; align-content: center; gap: 0;
         padding: var(--safe-area-inset-top, env(safe-area-inset-top)) 24px var(--safe-area-inset-bottom, env(safe-area-inset-bottom));
-        background: radial-gradient(120% 70% at 50% 38%, var(--lc-fond) 0%, var(--lc-fond-2) 100%);
+        background: var(--lc-fond);
         color: var(--lc-encre);
-        font-family: Urbanist, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-family: UrbanistLanc, Urbanist, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         overflow: hidden;
-        transition: opacity 300ms ease, transform 300ms cubic-bezier(.2,.7,.2,1);
+        transition: opacity 320ms ease;
         -webkit-user-select: none; user-select: none;
       }
       [data-theme="sombre"] #lancement {
-        --lc-fond: #131a2b; --lc-fond-2: #080b13; --lc-encre: #f1f3f8; --lc-doux: #9aa4b5;
-        --lc-rouge: #f06056; --lc-piste: rgb(255 255 255 / 10%);
+        --lc-fond: #080b13; --lc-encre: #f1f3f8; --lc-doux: #9aa4b5; --lc-rouge: #f0524a;
+        --lc-piste: rgb(255 255 255 / 10%); --lc-filet: #2a3346; --lc-carte: #131a2b;
+        --t-fond: #131a2b; --t-y: #f0524a; --t-raie: #f6f5f1; --t-coins: #3a4560;
       }
-      #lancement.part { opacity: 0; transform: scale(1.06); pointer-events: none; }
-      /* La scène : perspective, puis le monde légèrement incliné, où tournent les cartes. */
-      .lanc-scene { position: relative; width: 320px; height: 260px; perspective: 820px; }
-      /* L'ombre au sol de l'orbite, et le halo derrière la Ball. */
-      .lanc-sol { position: absolute; left: 50%; top: 84%; width: 250px; height: 34px; margin-left: -125px; border-radius: 50%; background: radial-gradient(closest-side, rgb(0 0 0 / 16%), transparent); }
-      [data-theme="sombre"] .lanc-sol { background: radial-gradient(closest-side, rgb(0 0 0 / 45%), transparent); }
-      .lanc-monde { position: absolute; inset: 0; transform-style: preserve-3d; transform: rotateX(-24deg); }
-      /* L'enveloppe porte l'aspiration (la rotation de l'orbite, une animation, l'emporterait
-         sur une transition posée sur elle). */
-      .lanc-aspire {
-        position: absolute; left: 50%; top: 50%; width: 0; height: 0;
-        transform-style: preserve-3d;
-        transition: transform 300ms cubic-bezier(.6,0,.9,.4), visibility 0s linear 300ms;
+      #lancement[data-icone="nuit"] { --t-fond: #080b13; --t-y: #f0524a; --t-raie: #f6f5f1; --t-coins: #3a4560; }
+      #lancement[data-icone="rouge"] { --t-fond: #d03f36; --t-y: #ffffff; --t-raie: #131a2b; --t-coins: #e48a83; }
+      #lancement.part { opacity: 0; pointer-events: none; }
+
+      /* La scène : l'icône au centre, deux cartes derrière, les coins du viseur autour. */
+      .lanc-scene { position: relative; width: 300px; height: 210px; display: grid; place-items: center; }
+      .lanc-carte {
+        position: absolute; left: 50%; top: 50%; width: 92px; height: 128px; margin: -64px 0 0 -46px;
+        border-radius: 9px; background: var(--lc-carte); box-shadow: 0 0 0 1px var(--lc-filet), 0 6px 18px rgb(0 0 0 / 8%);
+        animation: lancCarte 560ms cubic-bezier(.2,.9,.25,1.15) 620ms both;
       }
-      .lanc-orbite {
-        position: absolute; left: 0; top: 0; width: 0; height: 0;
-        transform-style: preserve-3d;
-        animation: lancTourne 7.5s linear infinite;
+      .lanc-carte.g { --sens: -1; --c: var(--lc-rouge); }
+      .lanc-carte.d { --sens: 1; --c: var(--lc-encre); }
+      /* Le dessin d'une carte : la fenêtre d'illustration, deux lignes de texte. */
+      .lanc-carte::before { content: ''; position: absolute; left: 9px; right: 9px; top: 9px; height: 62px; border-radius: 4px; background: var(--c); opacity: .16; }
+      .lanc-carte::after {
+        content: ''; position: absolute; left: 11px; bottom: 30px; width: 52px; height: 4px; border-radius: 2px; background: var(--c); opacity: .3;
+        box-shadow: 0 10px 0 0 var(--c);
       }
-      @keyframes lancTourne { to { transform: rotateY(-360deg); } }
-      .lanc-c {
-        position: absolute; left: -27px; top: -38px; width: 54px; height: 76px;
-        transform-style: preserve-3d;
-        transform: rotateY(calc(var(--i) * 60deg)) translateZ(140px);
+      @keyframes lancCarte {
+        from { opacity: 0; transform: translateX(0) rotate(0) scale(.9); }
+        to { opacity: 1; transform: translateX(calc(var(--sens) * 62px)) translateY(6px) rotate(calc(var(--sens) * 13deg)); }
       }
-      .lanc-i {
-        position: absolute; inset: 0; transform-style: preserve-3d;
-        animation: lancFlotte 2.6s ease-in-out infinite;
-        animation-delay: calc(var(--i) * -0.43s);
-      }
-      @keyframes lancFlotte { 50% { transform: translateY(-7px); } }
-      .lanc-face, .lanc-dos {
-        position: absolute; inset: 0; border-radius: 7px;
-        -webkit-backface-visibility: hidden; backface-visibility: hidden;
-        box-shadow: 0 6px 14px rgb(0 0 0 / 22%);
-      }
-      /* Le recto : la teinte de la rareté, son glyphe, et un reflet holographique qui passe. */
-      .lanc-face {
-        background:
-          linear-gradient(color-mix(in srgb, var(--c) 55%, #fff), color-mix(in srgb, var(--c) 55%, #fff)) 16% 76% / 50% 3px no-repeat,
-          linear-gradient(color-mix(in srgb, var(--c) 32%, #fff), color-mix(in srgb, var(--c) 32%, #fff)) 16% 85% / 34% 3px no-repeat,
-          linear-gradient(160deg, color-mix(in srgb, var(--c) 34%, #fff), color-mix(in srgb, var(--c) 10%, #fff)) 50% 9% / 84% 58% no-repeat,
-          #fff;
-        border: 2px solid var(--c);
+
+      /* L'icône de l'appli, en grand. */
+      .lanc-tuile {
+        position: relative; width: var(--tuile); height: var(--tuile); border-radius: 22.37%;
+        background: var(--t-fond); box-shadow: 0 0 0 1px var(--lc-filet), 0 14px 34px rgb(0 0 0 / 12%);
         overflow: hidden;
-        transition: border-color 200ms ease;
+        animation: lancTuile 560ms cubic-bezier(.2,.9,.25,1.2) both;
       }
-      /* L'illustration : l'artwork officiel d'un Pokémon tiré au hasard (embarqué dans l'appli),
-         remplacé à chaque passage de la carte derrière la Ball. */
-      .lanc-art {
-        position: absolute; left: 8%; top: 5%; width: 84%; height: 58%;
-        background: center / contain no-repeat;
-        filter: drop-shadow(0 1px 1px rgb(0 0 0 / 25%));
+      @keyframes lancTuile { from { opacity: 0; transform: scale(.45); } }
+      .lanc-tuile svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+      /* Le Y se déploie depuis son pied ; la raie sort de derrière lui, parallèle à son bras. */
+      .lanc-y { transform-box: fill-box; transform-origin: 50% 100%; animation: lancY 520ms cubic-bezier(.2,.9,.25,1.25) 170ms both; }
+      @keyframes lancY { from { transform: scaleY(0); } 60% { transform: scaleY(1.06); } to { transform: scaleY(1); } }
+      .lanc-raie { animation: lancRaie 460ms cubic-bezier(.2,.9,.25,1.3) 560ms both; }
+      @keyframes lancRaie { from { transform: translate(-66px, -40px); opacity: 0; } 30% { opacity: 1; } to { transform: none; opacity: 1; } }
+      /* La ligne de scan qui balaie l'icône pendant le chargement. */
+      .lanc-scan {
+        position: absolute; left: 22%; right: 22%; top: 24%; height: 2px; border-radius: 1px;
+        background: var(--lc-rouge); opacity: 0;
+        animation: lancScan 1.7s cubic-bezier(.45,0,.55,1) 1150ms infinite alternate;
       }
-      .lanc-face svg { position: absolute; right: 9%; bottom: 7%; width: 15px; height: 15px; fill: var(--c); }
-      .lanc-face::after {
-        content: ''; position: absolute; inset: -40%;
-        background: linear-gradient(115deg, transparent 38%, rgb(255 255 255 / 75%) 47%, rgb(255 220 255 / 45%) 52%, transparent 62%);
-        animation: lancReflet 2.4s ease-in-out infinite; animation-delay: calc(var(--i) * 0.4s);
+      [data-icone="rouge"] .lanc-scan { background: #fff; }
+      @keyframes lancScan { 0% { opacity: .45; transform: translateY(0); } 100% { opacity: .45; transform: translateY(calc(var(--tuile) * .5)); } }
+
+      /* Les coins du viseur, ceux du logo : centrés sur l'icône (16,4 % de son bord).
+         `--x` / `--y` : leur distance au centre de l'icône. */
+      .lanc-coin {
+        --x: calc(var(--tuile) * .336); --y: var(--x);
+        position: absolute; left: 50%; top: 50%; width: 15px; height: 15px; margin: -7.5px 0 0 -7.5px;
+        border: 0 solid var(--t-coins);
+        transform: translate(calc(var(--sx) * var(--x)), calc(var(--sy) * var(--y)));
+        z-index: 2;
+        animation: lancCoin 420ms cubic-bezier(.2,.9,.25,1.2) 300ms both;
       }
-      @keyframes lancReflet { 0%, 35% { transform: translateX(-60%); } 75%, 100% { transform: translateX(60%); } }
-      /* Le verso : le dos de carte de l'appli, une Poké Ball sur bleu nuit. */
-      .lanc-dos {
-        transform: rotateY(180deg);
-        background:
-          radial-gradient(circle at 50% 50%, #fff 0 5px, #1a2336 5.5px 7.5px, transparent 8px),
-          linear-gradient(#1a2336, #1a2336) 50% 50% / 32px 3px no-repeat,
-          radial-gradient(circle at 50% 50%, transparent 0 15.5px, #1a2336 16px),
-          linear-gradient(to bottom, #dc2626 50%, #fff 50%) 50% 50% / 33px 33px no-repeat,
-          #1a2336;
-        border: 2px solid #34497e;
+      .lanc-coin.hg { --sx: -1; --sy: -1; border-top-width: 3px; border-left-width: 3px; border-top-left-radius: 6px; }
+      .lanc-coin.hd { --sx: 1; --sy: -1; border-top-width: 3px; border-right-width: 3px; border-top-right-radius: 6px; }
+      .lanc-coin.bg { --sx: -1; --sy: 1; border-bottom-width: 3px; border-left-width: 3px; border-bottom-left-radius: 6px; }
+      .lanc-coin.bd { --sx: 1; --sy: 1; border-bottom-width: 3px; border-right-width: 3px; border-bottom-right-radius: 6px; }
+      @keyframes lancCoin {
+        from { opacity: 0; transform: translate(calc(var(--sx) * (var(--x) + 26px)), calc(var(--sy) * (var(--y) + 26px))); }
       }
-      /* La Ball et son anneau de chargement, face à nous (contre l'inclinaison du monde). */
-      .lanc-centre { position: absolute; left: 50%; top: 40%; width: 0; height: 0; transform: rotateX(24deg); transform-style: preserve-3d; }
-      .lanc-centre::before { content: ''; position: absolute; left: -95px; top: -95px; width: 190px; height: 190px; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--lc-rouge) 22%, transparent), transparent); }
-      #lancement.clic .lanc-centre::before { background: radial-gradient(closest-side, rgb(255 214 90 / 55%), transparent); transition: background 200ms ease; }
-      .lanc-anneau {
-        position: absolute; left: -60px; top: -60px; width: 120px; height: 120px; border-radius: 50%;
-        background: conic-gradient(var(--lc-rouge) calc(var(--p) * 1%), var(--lc-piste) 0);
-        -webkit-mask: radial-gradient(circle, transparent 0 52px, #000 53px);
-        mask: radial-gradient(circle, transparent 0 52px, #000 53px);
-        transition: opacity 300ms ease;
+
+      /* Le nom, lettre à lettre ; le y en rouge, comme celui du logo. */
+      .lanc-nom { margin: 18px 0 0; display: flex; font-size: 40px; line-height: 1; font-weight: 800; letter-spacing: -0.035em; }
+      .lanc-nom span { display: inline-block; animation: lancLettre 440ms cubic-bezier(.2,.9,.25,1.15) both; animation-delay: calc(700ms + var(--i) * 45ms); }
+      .lanc-nom .y { color: var(--lc-rouge); }
+      @keyframes lancLettre { from { opacity: 0; transform: translateY(16px); } }
+      .lanc-devise {
+        margin: 10px 0 0; font-size: 11px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--lc-doux);
+        animation: lancFondu 400ms ease 1000ms both;
       }
-      .lanc-ball {
-        position: absolute; left: -41px; top: -41px; width: 82px; height: 82px;
-        filter: drop-shadow(0 8px 14px rgb(0 0 0 / 28%));
-        animation: lancRespire 2.2s ease-in-out infinite;
-        transform-origin: 50% 85%;
-      }
-      @keyframes lancRespire { 50% { transform: translateY(-3px) scale(1.03); } }
-      .lanc-bouton { transition: fill 120ms ease; }
-      /* Les éclats d'étoiles de la capture. */
-      .lanc-eclat {
-        position: absolute; left: -6px; top: -6px; width: 12px; height: 12px; opacity: 0;
-        background: #f5c542;
-        clip-path: polygon(50% 0, 61% 38%, 100% 50%, 61% 62%, 50% 100%, 39% 62%, 0 50%, 39% 38%);
-      }
-      .lanc-nom { margin: 14px 0 0; font-size: 34px; font-weight: 800; letter-spacing: -0.5px; }
-      .lanc-nom span {
-        background: linear-gradient(90deg, var(--lc-encre) 0 40%, var(--lc-rouge) 50%, var(--lc-encre) 60% 100%) 0 0 / 300% 100%;
-        -webkit-background-clip: text; background-clip: text; color: transparent;
-        animation: lancBrille 3.2s ease-in-out infinite;
-      }
-      @keyframes lancBrille { from { background-position: 100% 0; } to { background-position: 0 0; } }
-      .lanc-etape { margin: 0; min-height: 20px; font-size: 15px; font-weight: 600; color: var(--lc-doux); text-align: center; }
-      .lanc-etape.change { animation: lancMot 340ms ease both; }
-      @keyframes lancMot { from { opacity: 0; transform: translateY(5px); } }
-      /* Le vrai travail en cours, en petit : séries, logos, cartes classées. */
-      .lanc-detail { margin: 0; min-height: 16px; font-size: 12px; font-weight: 600; color: var(--lc-doux); opacity: .75; font-variant-numeric: tabular-nums; text-align: center; }
-      .lanc-barre { width: 180px; height: 5px; border-radius: 99px; background: var(--lc-piste); overflow: hidden; margin-top: 6px; }
+      .lanc-bas { display: grid; justify-items: center; gap: 6px; margin-top: 26px; animation: lancFondu 400ms ease 1100ms both; }
+      @keyframes lancFondu { from { opacity: 0; transform: translateY(6px); } }
+      .lanc-barre { width: 128px; height: 3px; border-radius: 99px; background: var(--lc-piste); overflow: hidden; }
       .lanc-barre i { display: block; height: 100%; width: calc(var(--p) * 1%); border-radius: inherit; background: var(--lc-rouge); transition: width 300ms ease; }
+      .lanc-etape { margin: 6px 0 0; min-height: 18px; font-size: 13px; font-weight: 600; color: var(--lc-doux); text-align: center; }
+      .lanc-etape.change { animation: lancMot 320ms ease both; }
+      @keyframes lancMot { from { opacity: 0; transform: translateY(4px); } }
+      /* Le vrai travail en cours, en petit : séries, logos, cartes classées. */
+      .lanc-detail { margin: 0; min-height: 15px; font-size: 11px; font-weight: 600; color: var(--lc-doux); opacity: .7; font-variant-numeric: tabular-nums; text-align: center; }
       .lanc-passer {
-        margin-top: 18px; padding: 10px 22px; border-radius: 99px; border: 1px solid var(--lc-piste);
+        margin-top: 14px; padding: 10px 22px; border-radius: 99px; border: 1px solid var(--lc-filet);
         background: transparent; color: var(--lc-encre); font: inherit; font-weight: 700; font-size: 15px;
         opacity: 0; transform: translateY(6px); transition: opacity 300ms ease, transform 300ms ease;
       }
       .lanc-passer.vu { opacity: 1; transform: none; }
 
-      /* PRÊT : les cartes sont aspirées dans la Ball, qui tremble trois fois et se ferme. */
-      #lancement.fin .lanc-aspire { transform: translateY(-26px) scale3d(.02, .02, .02); visibility: hidden; }
-      #lancement.fin .lanc-passer { opacity: 0; pointer-events: none; }
-      #lancement.fin .lanc-anneau { opacity: 0; }
-      #lancement.fin .lanc-ball { animation: lancCapture 520ms ease-in-out 160ms both; }
-      @keyframes lancCapture {
-        0% { transform: rotate(0); } 18% { transform: rotate(-20deg); } 36% { transform: rotate(16deg); }
-        54% { transform: rotate(-10deg); } 70% { transform: rotate(5deg); } 82%, 100% { transform: rotate(0); }
-      }
-      #lancement.clic .lanc-bouton { fill: #fff6c2; }
-      #lancement.clic .lanc-eclat { animation: lancEclat 640ms cubic-bezier(.2,.8,.3,1) both; }
-      @keyframes lancEclat {
-        0% { opacity: 1; transform: rotate(var(--a)) translateX(10px) scale(.4); }
-        100% { opacity: 0; transform: rotate(var(--a)) translateX(78px) scale(1.1) rotate(160deg); }
-      }
+      /* PRÊT : tout s'efface ensemble, viseur compris (son ouverture jusqu'aux coins de
+         l'écran a été retirée le 21/11/2026, à la demande), puis l'écran part en fondu. */
+      .lanc-contenu { display: grid; justify-items: center; transition: opacity 280ms ease, transform 380ms cubic-bezier(.6,0,.4,1); }
+      #lancement.fin .lanc-contenu { opacity: 0; transform: scale(.96); }
+
       @media (prefers-reduced-motion: reduce) {
-        .lanc-orbite, .lanc-i, .lanc-face::after, .lanc-ball, .lanc-nom span, .lanc-etape.change { animation: none !important; }
-        #lancement.fin .lanc-ball, #lancement.clic .lanc-eclat { animation: none !important; }
+        #lancement *, #lancement *::before, #lancement *::after { animation: none !important; transition: none !important; }
       }
+      [data-mouvement="reduit"] #lancement *, [data-mouvement="reduit"] #lancement *::before, [data-mouvement="reduit"] #lancement *::after { animation: none !important; transition: none !important; }
     </style>
     <div id="lancement" aria-busy="true">
-      <div class="lanc-scene" aria-hidden="true">
-        <div class="lanc-sol"></div>
-        <div class="lanc-monde">
-          <div class="lanc-aspire"><div class="lanc-orbite">
-            <!-- commune, peu commune, rare, ultra rare, illustration rare, hyper rare -->
-            <div class="lanc-c" style="--i:0;--c:#7c8592"><div class="lanc-i"><div class="lanc-face"><i class="lanc-art"></i><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5.6"/></svg></div><div class="lanc-dos"></div></div></div>
-            <div class="lanc-c" style="--i:1;--c:#0f9488"><div class="lanc-i"><div class="lanc-face"><i class="lanc-art"></i><svg viewBox="0 0 24 24"><path d="M12 5 19 12 12 19 5 12z"/></svg></div><div class="lanc-dos"></div></div></div>
-            <div class="lanc-c" style="--i:2;--c:#2563eb"><div class="lanc-i"><div class="lanc-face"><i class="lanc-art"></i><svg viewBox="0 0 24 24"><path d="M12 4.6l2.1 4.5 4.9.6-3.6 3.3 1 4.8L12 15.4l-4.4 2.4 1-4.8-3.6-3.3 4.9-.6z"/></svg></div><div class="lanc-dos"></div></div></div>
-            <div class="lanc-c" style="--i:3;--c:#7c3aed"><div class="lanc-i"><div class="lanc-face"><i class="lanc-art"></i><svg viewBox="0 0 24 24"><path transform="matrix(.72 0 0 .72 -1.6 3.6)" d="M12 4.6l2.1 4.5 4.9.6-3.6 3.3 1 4.8L12 15.4l-4.4 2.4 1-4.8-3.6-3.3 4.9-.6z"/><path transform="matrix(.72 0 0 .72 8.3 3.6)" d="M12 4.6l2.1 4.5 4.9.6-3.6 3.3 1 4.8L12 15.4l-4.4 2.4 1-4.8-3.6-3.3 4.9-.6z"/></svg></div><div class="lanc-dos"></div></div></div>
-            <div class="lanc-c" style="--i:4;--c:#0891b2"><div class="lanc-i"><div class="lanc-face"><i class="lanc-art"></i><svg viewBox="0 0 24 24"><rect x="4.6" y="4.6" width="14.8" height="14.8" rx="3.6" fill="none" stroke="currentColor" stroke-width="1.8" style="stroke:var(--c)"/><path transform="matrix(.6 0 0 .6 4.8 4.9)" d="M12 4.6l2.1 4.5 4.9.6-3.6 3.3 1 4.8L12 15.4l-4.4 2.4 1-4.8-3.6-3.3 4.9-.6z"/></svg></div><div class="lanc-dos"></div></div></div>
-            <div class="lanc-c" style="--i:5;--c:#c58a10"><div class="lanc-i"><div class="lanc-face"><i class="lanc-art"></i><svg viewBox="0 0 24 24"><path d="M7.2 6.2h9.6l3 4.1L12 19.2 4.2 10.3z"/></svg></div><div class="lanc-dos"></div></div></div>
-          </div></div>
-          <div class="lanc-centre">
-            <div class="lanc-anneau"></div>
-            <svg class="lanc-ball" viewBox="0 0 100 100">
-              <circle cx="50" cy="50" r="46" fill="#fff" stroke="#1d2330" stroke-width="5"/>
-              <path d="M4 50a46 46 0 0 1 92 0z" fill="#e5483e"/>
-              <path d="M14 30a40 40 0 0 1 22-18" fill="none" stroke="rgb(255 255 255 / 55%)" stroke-width="6" stroke-linecap="round"/>
-              <path d="M4 50h92" stroke="#1d2330" stroke-width="6"/>
-              <circle cx="50" cy="50" r="15" fill="#fff" stroke="#1d2330" stroke-width="5"/>
-              <circle class="lanc-bouton" cx="50" cy="50" r="7" fill="#e9ecf2"/>
+      <div class="lanc-contenu">
+        <div class="lanc-scene" aria-hidden="true">
+          <i class="lanc-carte g"></i><i class="lanc-carte d"></i>
+          <div class="lanc-tuile">
+            <svg viewBox="0 0 1024 1024">
+              <path class="lanc-raie" fill="var(--t-raie)" d="M705.02 296H761L604 557.67V728H556V544.37Z"/>
+              <path class="lanc-y" fill="var(--t-y)" d="M263.63 296H403.57L468 403.38L532.43 296H672.37L528 536.62V728H408V536.62Z"/>
             </svg>
-            <i class="lanc-eclat" style="--a:0deg"></i><i class="lanc-eclat" style="--a:45deg"></i><i class="lanc-eclat" style="--a:90deg"></i><i class="lanc-eclat" style="--a:135deg"></i>
-            <i class="lanc-eclat" style="--a:180deg"></i><i class="lanc-eclat" style="--a:225deg"></i><i class="lanc-eclat" style="--a:270deg"></i><i class="lanc-eclat" style="--a:315deg"></i>
+            <i class="lanc-scan"></i>
           </div>
+          <i class="lanc-coin hg"></i><i class="lanc-coin hd"></i><i class="lanc-coin bg"></i><i class="lanc-coin bd"></i>
+        </div>
+        <h1 class="lanc-nom" aria-label="Unydex"><span style="--i:0">U</span><span style="--i:1">n</span><span class="y" style="--i:2">y</span><span style="--i:3">d</span><span style="--i:4">e</span><span style="--i:5">x</span></h1>
+        <p class="lanc-devise" aria-hidden="true"></p>
+        <div class="lanc-bas">
+          <div class="lanc-barre" aria-hidden="true"><i></i></div>
+          <p class="lanc-etape" role="status" aria-live="polite"></p>
+          <p class="lanc-detail" aria-hidden="true"></p>
+          <button class="lanc-passer" type="button" hidden></button>
         </div>
       </div>
-      <h1 class="lanc-nom"><span>Unydex</span></h1>
-      <p class="lanc-etape" role="status" aria-live="polite"></p>
-      <p class="lanc-detail" aria-hidden="true"></p>
-      <div class="lanc-barre" aria-hidden="true"><i></i></div>
-      <button class="lanc-passer" type="button" hidden></button>
     </div>
     <script>
       // Pilote de l'écran : main.js appelle detail(), progres() et fin(). Sans lui (code qui ne
@@ -252,28 +232,34 @@
         var t0 = performance.now();
         var lg = 'fr';
         try { lg = localStorage.getItem('pcbox.langue') || (navigator.language || 'fr').slice(0, 2); } catch (e) {}
+        // L'icône choisie au Profil (Apparence) : l'écran prend ses couleurs.
+        try {
+          var ic = JSON.parse(localStorage.getItem('pcbox.prefs') || '{}').icone;
+          if (ic === 'nuit' || ic === 'rouge') el.dataset.icone = ic;
+        } catch (e) {}
         var TEXTES = {
-          fr: { passer: 'Continuer', messages: ['Ouverture du Pokédex…', 'Réveil des Pokémon…', 'Mélange des boosters…',
-            'Polissage des cartes holographiques…', 'Tri des raretés…', 'Calibrage du Pokédex…', 'Classement des extensions par bloc…',
+          fr: { passer: 'Continuer', devise: 'Pokédex · Cartes · Scan', messages: ['Ouverture du Pokédex…', 'Réveil des Pokémon…', 'Mélange des boosters…',
+            'Polissage des cartes holographiques…', 'Tri des raretés…', 'Calibrage du viseur…', 'Classement des extensions par bloc…',
             'Vérification des reverses…', 'Comptage des Poké Balls…', 'Lustrage des Master Balls…', 'Rangement des classeurs…',
             'Synchronisation des boîtes PC…', 'Repérage des cartes rares…', 'Dépoussiérage des promos…', 'Alignement des logos…'] },
-          en: { passer: 'Continue', messages: ['Opening the Pokédex…', 'Waking up the Pokémon…', 'Shuffling booster packs…',
-            'Polishing holo cards…', 'Sorting rarities…', 'Calibrating the Pokédex…', 'Grouping sets by era…',
+          en: { passer: 'Continue', devise: 'Pokédex · Cards · Scan', messages: ['Opening the Pokédex…', 'Waking up the Pokémon…', 'Shuffling booster packs…',
+            'Polishing holo cards…', 'Sorting rarities…', 'Calibrating the viewfinder…', 'Grouping sets by era…',
             'Checking reverse holos…', 'Counting Poké Balls…', 'Buffing Master Balls…', 'Tidying up binders…',
             'Syncing PC boxes…', 'Spotting rare cards…', 'Dusting off promos…', 'Lining up set logos…'] },
-          ja: { passer: 'つづける', messages: ['ずかんを ひらいています…', 'ポケモンを おこしています…', 'パックを まぜています…',
-            'ホロカードを みがいています…', 'レアリティを ならべています…', 'ずかんを ちょうせい中…', 'シリーズを せいり中…',
+          ja: { passer: 'つづける', devise: 'ずかん · カード · スキャン', messages: ['ずかんを ひらいています…', 'ポケモンを おこしています…', 'パックを まぜています…',
+            'ホロカードを みがいています…', 'レアリティを ならべています…', 'ファインダーを ちょうせい中…', 'シリーズを せいり中…',
             'リバースを たしかめています…', 'モンスターボールを かぞえています…', 'マスターボールを みがいています…', 'バインダーを せいり中…',
             'パソコンの ボックスを どうき中…', 'レアカードを さがしています…', 'プロモカードを ととのえています…', 'ロゴを ならべています…'] },
         };
         var T = TEXTES[lg] || TEXTES.fr;
-        // Ce que l'écran a montré (messages, détails, cartes), relu pour le vérifier.
+        // Ce que l'écran a montré (messages, détails), relu pour le vérifier.
         var journal = window.__lancementJournal = [];
         var note = function (x) { if (journal.length < 400) journal.push(Math.round(performance.now()) + ' ' + x); };
         var etape = el.querySelector('.lanc-etape'), detail = el.querySelector('.lanc-detail'), passer = el.querySelector('.lanc-passer');
         passer.textContent = T.passer;
+        el.querySelector('.lanc-devise').textContent = T.devise;
         var fini = false;
-        var reduit = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var reduit = matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.mouvement === 'reduit';
 
         // Les messages : le premier, puis les autres dans un ordre tiré au hasard.
         function dit(txt) {
@@ -288,58 +274,12 @@
         dit(T.messages[0]);
         var minuteurMots = setInterval(function () { if (!fini) dit(suite[rang++ % suite.length]); }, 700);
 
-        // Les cartes : un Pokémon et une rareté tirés au hasard ; chacune en change quand elle
-        // passe DERRIÈRE la Ball (on voit alors son dos), l'image suivante déjà chargée.
-        var RARETES = [
-          ['#7c8592', '<circle cx="12" cy="12" r="5.6"/>'],
-          ['#0f9488', '<path d="M12 5 19 12 12 19 5 12z"/>'],
-          ['#2563eb', '<path d="M12 4.6l2.1 4.5 4.9.6-3.6 3.3 1 4.8L12 15.4l-4.4 2.4 1-4.8-3.6-3.3 4.9-.6z"/>'],
-          ['#7c3aed', '<path transform="matrix(.72 0 0 .72 -1.6 3.6)" d="M12 4.6l2.1 4.5 4.9.6-3.6 3.3 1 4.8L12 15.4l-4.4 2.4 1-4.8-3.6-3.3 4.9-.6z"/><path transform="matrix(.72 0 0 .72 8.3 3.6)" d="M12 4.6l2.1 4.5 4.9.6-3.6 3.3 1 4.8L12 15.4l-4.4 2.4 1-4.8-3.6-3.3 4.9-.6z"/>'],
-          ['#0891b2', '<rect x="4.6" y="4.6" width="14.8" height="14.8" rx="3.6" fill="none" stroke="#0891b2" stroke-width="1.8"/><path transform="matrix(.6 0 0 .6 4.8 4.9)" d="M12 4.6l2.1 4.5 4.9.6-3.6 3.3 1 4.8L12 15.4l-4.4 2.4 1-4.8-3.6-3.3 4.9-.6z"/>'],
-          ['#db2777', '<rect x="4.6" y="4.6" width="14.8" height="14.8" rx="3.6" fill="none" stroke="#db2777" stroke-width="1.8"/><path transform="matrix(.62 0 0 .62 4.56 4.56)" d="M12 4.2c.7 4.4 2.5 6.3 7.6 7.8-5.1 1.5-6.9 3.4-7.6 7.8-.7-4.4-2.5-6.3-7.6-7.8 5.1-1.5 6.9-3.4 7.6-7.8z"/>'],
-          ['#c58a10', '<path d="M7.2 6.2h9.6l3 4.1L12 19.2 4.2 10.3z"/>'],
-          ['#0ea5e9', '<path d="M12 4.2c.7 4.4 2.5 6.3 7.6 7.8-5.1 1.5-6.9 3.4-7.6 7.8-.7-4.4-2.5-6.3-7.6-7.8 5.1-1.5 6.9-3.4 7.6-7.8z"/>'],
-          ['#16a34a', '<path d="M12 4.6 14 9l4.8.4-3.6 3.2 1.1 4.8L12 15l-4.3 2.4 1.1-4.8-3.6-3.2L10 9z" fill="none" stroke="#16a34a" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="11.6" r="1.6"/>'],
-        ];
-        var cartes = [].slice.call(el.querySelectorAll('.lanc-c'));
-        var art = function (id) { return 'sprites/other/official-artwork/' + id + '.webp'; };
-        function tirage() {
-          var t = { r: RARETES[Math.floor(Math.random() * RARETES.length)], id: 1 + Math.floor(Math.random() * 1025) };
-          t.img = new Image();
-          t.img.src = art(t.id);
-          return t;
-        }
-        function pose(c, t) {
-          c.style.setProperty('--c', t.r[0]);
-          c.querySelector('.lanc-face svg').innerHTML = t.r[1];
-          c.querySelector('.lanc-art').style.backgroundImage = 'url("' + art(t.id) + '")';
-          note('carte ' + cartes.indexOf(c) + ' → n° ' + t.id);
-        }
-        cartes.forEach(function (c) { pose(c, tirage()); c._suivante = tirage(); c._vue = false; });
-        var orbite = el.querySelector('.lanc-orbite');
-        var minuteurCartes = reduit ? 0 : setInterval(function () {
-          if (fini) return;
-          var m;
-          try { m = new DOMMatrixReadOnly(getComputedStyle(orbite).transform); } catch (e) { return; }
-          // L'angle de l'orbite (rotateY) ; la carte i regarde à cet angle + i × 60°.
-          var theta = Math.atan2(m.m31, m.m11);
-          cartes.forEach(function (c, i) {
-            var face = Math.cos(theta + i * Math.PI / 3);
-            if (face > 0.3) c._vue = true;
-            else if (face < -0.55 && c._vue && c._suivante.img.complete) {
-              pose(c, c._suivante);
-              c._suivante = tirage();
-              c._vue = false;
-            }
-          });
-        }, 160);
-
         function retire() { if (el.parentNode) el.parentNode.removeChild(el); }
         function part() {
           el.classList.add('part');
           note('écran parti');
           el.setAttribute('aria-busy', 'false');
-          setTimeout(retire, 340);
+          setTimeout(retire, 360);
         }
         // La pub d'ouverture (pubs.js, branchée par main.js sur `avantDepart`) se pose SUR
         // l'écran, qui ne part qu'à sa fermeture : Google la veut sur l'écran de chargement,
@@ -356,23 +296,23 @@
           detail: function (txt) { if (!fini && txt !== detail.textContent) { detail.textContent = txt || ''; note('· ' + txt); } },
           etape: function (txt) { api.detail(txt); },
           progres: function (p) { el.style.setProperty('--p', Math.max(0, Math.min(100, Math.round(p * 100)))); },
-          // `vite` : on saute la capture (« Continuer »).
+          // `vite` : on saute l'ouverture du viseur (« Continuer »).
           fin: function (txt, vite) {
             if (fini) return;
             fini = true;
             clearInterval(minuteurMots);
-            clearInterval(minuteurCartes);
             api.progres(1);
             if (txt) dit(txt);
             detail.textContent = '';
             if (vite) { part(); return; }
             if (reduit) { avantDepart(part); return; }
-            // La rotation se voit au moins un instant, puis la capture.
-            var attente = Math.max(0, 800 - (performance.now() - t0));
+            // Le logo s'est déployé en entier (≈ 1,1 s), PUIS une demi-seconde de plus pour
+            // lire « Unydex » et ce qui est dessous (21/11/2026, à la demande).
+            var attente = Math.max(0, 1250 - (performance.now() - t0)) + 500;
             setTimeout(function () {
               el.classList.add('fin');
-              setTimeout(function () { el.classList.add('clic'); }, 680);
-              setTimeout(function () { avantDepart(part); }, 930);
+              note('fondu');
+              setTimeout(function () { avantDepart(part); }, 300);
             }, attente);
           },
           montreContinuer: function () {

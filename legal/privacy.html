@@ -71,7 +71,7 @@
 <body>
 <main>
 <h1>Privacy Policy</h1>
-<p><strong>Version 2.4 — Effective 21 November 2026</strong> (added: section 2.3, anonymous error reports and usage statistics; Android version)</p>
+<p><strong>Version 2.5 — Effective 21 November 2026</strong> (added: section 2.3, anonymous error reports and usage statistics; Android version; section 12, rate limiting and anti-bot check)</p>
 <h2>Preamble</h2>
 <p>This policy informs users of the Unydex application and its associated website (together, "the App") about the processing of personal data carried out when they use them, in accordance with Articles 12 to 14 of Regulation (EU) 2016/679 of 27 April 2016 (the "GDPR"), the French Data Protection Act No. 78-17 of 6 January 1978 as amended, and its Article 82 on trackers.</p>
 <p>It forms an integral part of the <a href="conditions.html">Terms of Use</a>. The French version prevails in case of discrepancy.</p>
@@ -223,6 +223,7 @@
 <li><strong>Supabase, Inc.</strong> — database, authentication and real-time sync. Data hosted in the European Union, <strong>Ireland region</strong> (Amazon Web Services, eu-west-1).</li>
 <li><strong>GitHub, Inc.</strong> — hosting of the website and its files.</li>
 <li><strong>Sendinblue SAS (Brevo)</strong>, Paris, France — sending account emails (sign-up confirmation, password reset). It receives the email address and the message content. No marketing email is ever sent; every email contains an unsubscribe link, and deleting the account ends all emails.</li>
+<li><strong>Cloudflare, Inc.</strong> — anti-bot check ("Turnstile") at sign-up, email sign-in and password reset, when enabled. It receives technical browser signals, without advertising cookies.</li>
 <li><strong>Apple Inc. / Apple Distribution International Ltd.</strong> — App distribution, sign-in service and, where applicable, subscription payment.</li>
 </ul>
 <p>Also recipients, as controllers of their own processing: Google (sign-in, if chosen; advertising), Mistral AI (PokéAdvisor, at your initiative) and the third-party services listed in Section 3.</p>
@@ -239,13 +240,14 @@
 <tr><td>Reports</td><td>One year at most after they are handled</td></tr>
 <tr><td>Error reports and usage statistics (section 2.3)</td><td>90 days</td></tr>
 <tr><td>Friend-code attempts</td><td>One day</td></tr>
+<tr><td>IP address fingerprint used for rate limiting (section 12)</td><td>Two days</td></tr>
 <tr><td>Advertising choices</td><td>Thirteen months at most, then asked again</td></tr>
 <tr><td>Hosting providers' technical logs</td><td>As set by each provider, from a few days to a few weeks</td></tr>
 <tr><td>Subscription data</td><td>Duration of the subscription, then the legal retention period for accounting records (ten years) for required data only</td></tr>
 </tbody></table></div>
 <hr />
 <h2>12 — Security</h2>
-<p>The controller implements appropriate measures under Article 32 GDPR, including: encryption of all communications (HTTPS); hashed passwords; <strong>database-level</strong> isolation (row-level security) ensuring an account can only read and modify its own records; no privileges attached to the public key built into the App; restricted and locked high-privilege functions; a content security policy limiting the App's network destinations.</p>
+<p>The controller implements appropriate measures under Article 32 GDPR, including: encryption of all communications (HTTPS); hashed passwords; <strong>database-level</strong> isolation (row-level security) ensuring an account can only read and modify its own records; no privileges attached to the public key built into the App; restricted and locked high-privilege functions; a content security policy limiting the App's network destinations; <strong>rate limiting</strong> (device registration, statistics, friend requests, eBay price lookups), which, for requests made without an account, relies on an <strong>IP address fingerprint</strong> (a hash of the address and the day, never the address itself), erased after two days; and, when enabled, an anti-bot check at sign-up (section 9). Legal basis: the controller's legitimate interest in protecting the service against abuse (Article 6(1)(f) GDPR).</p>
 <p><strong>No other user can access an account's email address, profile or collection.</strong></p>
 <p>In the event of a data breach, the controller makes the notifications required by Articles 33 and 34 GDPR.</p>
 <hr />
