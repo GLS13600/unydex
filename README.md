@@ -7,7 +7,7 @@ l'application **déjà compilée**, prête à être servie, et il sert à deux c
 
 GitHub Pages publie ce dépôt à l'adresse :
 
-### → <https://gls13600.github.io/boites-pc/>
+### → <https://gls13600.github.io/unydex/>
 
 C'est l'appli complète, utilisable sans rien installer : Living Dex et boîtes PC, Pokédex,
 équipes, collection de cartes, classeurs, scan.
@@ -21,12 +21,12 @@ C'est l'appli complète, utilisable sans rien installer : Living Dex et boîtes 
 
 ## 2. Installer l'appli iPhone avec SideStore
 
-Les [releases](https://github.com/GLS13600/boites-pc/releases) de ce dépôt portent le
+Les [releases](https://github.com/GLS13600/unydex/releases) de ce dépôt portent le
 fichier `Unydex.ipa` (l'application iPhone « Unydex Dev »). SideStore propose ses mises à
 jour, sans câble, depuis la source :
 
 ```
-https://gls13600.github.io/boites-pc/source.json
+https://gls13600.github.io/unydex/source.json
 ```
 
 À ajouter une fois dans SideStore (Sources → +).
@@ -49,7 +49,7 @@ version.
 ## Contact et demandes de retrait
 
 - **Une question, un problème, ou une demande de retrait d'un contenu** : ouvrez une
-  [*issue*](https://github.com/GLS13600/boites-pc/issues) sur ce dépôt, ou écrivez à
+  [*issue*](https://github.com/GLS13600/unydex/issues) sur ce dépôt, ou écrivez à
   **unydexapp@gmail.com**.
 - Tout contenu dont le titulaire des droits demande le retrait est retiré promptement.
 
