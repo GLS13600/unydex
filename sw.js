@@ -1,5 +1,5 @@
 // Généré par scripts/build-sw.mjs — ne pas éditer à la main.
-const CACHE = 'unydex-20261122213939';
+const CACHE = 'unydex-20261122215805';
 const SHELL = [
   "./",
   "./index.html",
@@ -7,7 +7,7 @@ const SHELL = [
   "./assets/compte-natif-CB_N_ZW_.js",
   "./assets/index-Bu_klARd.css",
   "./assets/index-D5bMjAqh.js",
-  "./assets/index-DO6fdFxR.js",
+  "./assets/index-DIiq-JvZ.js",
   "./assets/learnsets-vg-yNECzyJ5.js",
   "./assets/scan-worker-RLWO-DSL.js"
 ];
