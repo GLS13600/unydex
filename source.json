@@ -14,18 +14,18 @@
       "screenshotURLs": [],
       "versions": [
         {
-          "version": "1.0.228",
+          "version": "1.0.233",
           "date": "2026-11-22",
-          "localizedDescription": "Build 1.0.228.",
-          "downloadURL": "https://github.com/GLS13600/unydex/releases/download/v1.0.228/Unydex.ipa",
-          "size": 385050210,
+          "localizedDescription": "Build 1.0.233.",
+          "downloadURL": "https://github.com/GLS13600/unydex/releases/download/v1.0.233/Unydex.ipa",
+          "size": 385085173,
           "minOSVersion": "15.0"
         }
       ],
-      "version": "1.0.228",
+      "version": "1.0.233",
       "versionDate": "2026-11-22",
-      "downloadURL": "https://github.com/GLS13600/unydex/releases/download/v1.0.228/Unydex.ipa",
-      "size": 385050210
+      "downloadURL": "https://github.com/GLS13600/unydex/releases/download/v1.0.233/Unydex.ipa",
+      "size": 385085173
     }
   ]
 }
