@@ -1,15 +1,15 @@
 // Généré par scripts/build-sw.mjs — ne pas éditer à la main.
-const CACHE = 'unydex-20261122194803';
+const CACHE = 'unydex-20261122213939';
 const SHELL = [
   "./",
   "./index.html",
   "./icon.svg",
   "./assets/compte-natif-CB_N_ZW_.js",
-  "./assets/index-BVJjSzyT.css",
+  "./assets/index-Bu_klARd.css",
   "./assets/index-D5bMjAqh.js",
-  "./assets/index-DpVagk6s.js",
+  "./assets/index-DO6fdFxR.js",
   "./assets/learnsets-vg-yNECzyJ5.js",
-  "./assets/scan-worker-B3QWNv6j.js"
+  "./assets/scan-worker-RLWO-DSL.js"
 ];
 
 const abs = (r) => new URL(r, self.location).href;
